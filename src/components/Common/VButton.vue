@@ -24,7 +24,7 @@ const classes = computed(() => {
     class="v-button"
     v-bind="$attrs"
     :class="classes"
-    :disabled="disabled && loading"
+    :disabled="disabled || loading"
   >
     <slot v-if="!loading"/>
     <span v-else class="v-button__loader"/>
@@ -68,9 +68,8 @@ $base-class: "v-button";
   }
 
   // Disabled state
-  .#{$base-class}--disabled {
-    cursor: not-allowed;
-    background: rgb(163, 163, 163) !important;
+  &.#{$base-class}--disabled {
+    background: rgb(200, 200, 200) !important;
     color: black
   }
 
@@ -84,9 +83,14 @@ $base-class: "v-button";
     }
 
     // Disabled state
-    &.#{$base-class}--disabled {
-      color: rgb(163, 163, 163) !important;
+    .#{$base-class}--disabled {
+      color: rgb(200, 200, 200) !important;
     }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+
   }
 
   &__loader {

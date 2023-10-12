@@ -34,7 +34,7 @@ const addItem = () => {
     <div class="actions-panel">
       <VSelect :disabled="isLoading" :options="OPTIONS" @change="changeOption"/>
       <VInput :disabled="isLoading" v-model="name"/>
-      <VButton :disabled="isLoading" :loading="isLoading" @click="addItem">Создать</VButton>
+      <VButton :disabled="isLoading || !option" :loading="isLoading" @click="addItem">Создать</VButton>
     </div>
     <div class="entities">
       <div class="entity" v-for="(entity, type) of entities" :key="type">
