@@ -7,6 +7,7 @@ import VSelect from './components/Common/VSelect.vue';
 
 import { LEAD, CONTACT, COMPANY, Entities } from './constants/entities'
 import { useStore } from "./composables/useStore";
+import EntityList from './components/EntityList.vue';
 
 const { isLoading, entities } = storeToRefs(useStore())
 const { add } = useStore()
@@ -37,10 +38,7 @@ const addItem = () => {
       <VButton :disabled="isLoading || !option" :loading="isLoading" @click="addItem">Создать</VButton>
     </div>
     <div class="entities">
-      <div class="entity" v-for="(entity, type) of entities" :key="type">
-        {{ OPTIONS[type] }}
-        <div class="entity__item" v-for="item of entity">{{ item }}</div>
-      </div>
+      <EntityList v-for="(entity, type) of entities" :title="OPTIONS[type]" :items="entity" :type="type"/>
     </div>
   </div>
 </template>
@@ -59,11 +57,6 @@ const addItem = () => {
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 4px;
-}
-
-.entity {
-  width: 33%;
   padding: 4px;
 }
 </style>
